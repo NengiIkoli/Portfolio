@@ -492,9 +492,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator - Fixed positioning to avoid overlapping with profile pic */}
           <div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
+            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
             onClick={() => scrollToSection("education")}
           >
             <span className="text-sm text-gray-400 mb-2">Scroll Down</span>
@@ -527,73 +527,76 @@ export default function Home() {
                 </p>
               </div>
 
+              {/* Mobile-optimized timeline */}
               <div className="max-w-4xl mx-auto relative">
                 {/* Timeline vertical line with animated gradient */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#4d8bf5] via-[#a8c5ff] to-[#4d8bf5] animate-pulse-slow z-10"></div>
+                <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#4d8bf5] via-[#a8c5ff] to-[#4d8bf5] animate-pulse-slow z-10"></div>
 
-                {/* Timeline items */}
-                <div className="space-y-24 relative">
+                {/* Timeline items - Mobile optimized */}
+                <div className="space-y-16 sm:space-y-24 relative">
                   {/* 2022 - Bachelors */}
-                  <div className="flex items-center relative group">
-                    {/* Content box - Left side */}
-                    <div className="w-[45%] relative">
-                      <div className="relative bg-[#051428]/80 backdrop-blur-sm rounded-[30px] p-8 border border-[#a8c5ff] shadow-[0_0_15px_rgba(168,197,255,0.3)] z-10 transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(168,197,255,0.5)] group-hover:translate-x-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center relative group pl-12 sm:pl-0">
+                    {/* Timeline dot and year marker - Mobile optimized */}
+                    <div className="absolute left-0 sm:left-1/2 top-0 sm:transform sm:-translate-x-1/2">
+                      <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
+                      </div>
+                      <div className="absolute left-10 sm:-right-16 top-0 text-white font-bold text-xl">2022</div>
+                    </div>
+
+                    {/* Content box - Mobile optimized */}
+                    <div className="w-full sm:w-[45%] relative mt-2 sm:mt-0">
+                      <div className="relative bg-[#051428]/80 backdrop-blur-sm rounded-[30px] p-6 sm:p-8 border border-[#a8c5ff] shadow-[0_0_15px_rgba(168,197,255,0.3)] z-10 transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(168,197,255,0.5)] group-hover:translate-x-2">
                         <div className="absolute top-4 right-4 text-[#a8c5ff] opacity-20">
-                          <Award className="w-12 h-12" />
+                          <Award className="w-10 h-10 sm:w-12 sm:h-12" />
                         </div>
                         <div className="flex items-start mb-4">
                           <Calendar className="w-5 h-5 text-[#a8c5ff] mr-2 mt-1" />
                           <span className="text-[#a8c5ff] font-medium">2018 - 2022</span>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                           Bachelors of Arts in Interior Architecture
                         </h3>
                         <div className="flex items-start mb-4">
                           <MapPin className="w-5 h-5 text-gray-400 mr-2 mt-1" />
                           <span className="text-gray-300">The George Washington University</span>
                         </div>
-                        <p className="text-gray-400">
+                        <p className="text-gray-400 text-sm sm:text-base">
                           Developed a strong foundation in design principles, spatial awareness, and creative
                           problem-solving.
                         </p>
                       </div>
                     </div>
-
-                    {/* Timeline dot and year marker */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2">
-                      <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
-                        <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
-                      </div>
-                      <div className="absolute -right-16 top-0 text-white font-bold text-xl">2022</div>
-                    </div>
                   </div>
 
                   {/* 2025 - Path2TECH */}
-                  <div className="flex items-center justify-end relative group">
-                    {/* Timeline dot and year marker */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2">
+                  <div className="flex flex-col sm:flex-row sm:justify-end sm:items-center relative group pl-12 sm:pl-0">
+                    {/* Timeline dot and year marker - Mobile optimized */}
+                    <div className="absolute left-0 sm:left-1/2 top-0 sm:transform sm:-translate-x-1/2">
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute -left-16 top-0 text-white font-bold text-xl">2025</div>
+                      <div className="absolute left-10 sm:-left-16 top-0 text-white font-bold text-xl">2025</div>
                     </div>
 
-                    {/* Content box - Right side */}
-                    <div className="w-[45%] relative">
-                      <div className="relative bg-[#051428]/80 backdrop-blur-sm rounded-[30px] p-8 border border-[#a8c5ff] shadow-[0_0_15px_rgba(168,197,255,0.3)] z-10 transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(168,197,255,0.5)] group-hover:-translate-x-2">
+                    {/* Content box - Mobile optimized */}
+                    <div className="w-full sm:w-[45%] relative mt-2 sm:mt-0">
+                      <div className="relative bg-[#051428]/80 backdrop-blur-sm rounded-[30px] p-6 sm:p-8 border border-[#a8c5ff] shadow-[0_0_15px_rgba(168,197,255,0.3)] z-10 transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(168,197,255,0.5)] group-hover:-translate-x-2">
                         <div className="absolute top-4 right-4 text-[#a8c5ff] opacity-20">
-                          <Code className="w-12 h-12" />
+                          <Code className="w-10 h-10 sm:w-12 sm:h-12" />
                         </div>
                         <div className="flex items-start mb-4">
                           <Calendar className="w-5 h-5 text-[#a8c5ff] mr-2 mt-1" />
                           <span className="text-[#a8c5ff] font-medium">2024 - 2025</span>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">Path2TECH Full Stack Developer Program</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                          Path2TECH Full Stack Developer Program
+                        </h3>
                         <div className="flex items-start mb-4">
                           <Briefcase className="w-5 h-5 text-gray-400 mr-2 mt-1" />
                           <span className="text-gray-300">NPower | Professional Certification</span>
                         </div>
-                        <p className="text-gray-400">
+                        <p className="text-gray-400 text-sm sm:text-base">
                           Comprehensive training in modern web development technologies including React, JavaScript,
                           HTML/CSS, and backend technologies.
                         </p>
@@ -602,35 +605,37 @@ export default function Home() {
                   </div>
 
                   {/* 2026 - Masters */}
-                  <div className="flex items-center relative group">
-                    {/* Content box - Left side */}
-                    <div className="w-[45%] relative">
-                      <div className="relative bg-[#051428]/80 backdrop-blur-sm rounded-[30px] p-8 border border-[#a8c5ff] shadow-[0_0_15px_rgba(168,197,255,0.3)] z-10 transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(168,197,255,0.5)] group-hover:translate-x-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center relative group pl-12 sm:pl-0">
+                    {/* Timeline dot and year marker - Mobile optimized */}
+                    <div className="absolute left-0 sm:left-1/2 top-0 sm:transform sm:-translate-x-1/2">
+                      <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
+                      </div>
+                      <div className="absolute left-10 sm:-right-16 top-0 text-white font-bold text-xl">2026</div>
+                    </div>
+
+                    {/* Content box - Mobile optimized */}
+                    <div className="w-full sm:w-[45%] relative mt-2 sm:mt-0">
+                      <div className="relative bg-[#051428]/80 backdrop-blur-sm rounded-[30px] p-6 sm:p-8 border border-[#a8c5ff] shadow-[0_0_15px_rgba(168,197,255,0.3)] z-10 transition-all duration-500 group-hover:shadow-[0_0_25px_rgba(168,197,255,0.5)] group-hover:translate-x-2">
                         <div className="absolute top-4 right-4 text-[#a8c5ff] opacity-20">
-                          <Award className="w-12 h-12" />
+                          <Award className="w-10 h-10 sm:w-12 sm:h-12" />
                         </div>
                         <div className="flex items-start mb-4">
                           <Calendar className="w-5 h-5 text-[#a8c5ff] mr-2 mt-1" />
                           <span className="text-[#a8c5ff] font-medium">2024 - 2026</span>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">Masters of Science in Engineering</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                          Masters of Science in Engineering
+                        </h3>
                         <div className="flex items-start mb-4">
                           <MapPin className="w-5 h-5 text-gray-400 mr-2 mt-1" />
                           <span className="text-gray-300">Grand Canyon University</span>
                         </div>
-                        <p className="text-gray-400">
+                        <p className="text-gray-400 text-sm sm:text-base">
                           Advanced studies focusing on engineering principles and technical innovation in digital
                           systems.
                         </p>
                       </div>
-                    </div>
-
-                    {/* Timeline dot and year marker */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2">
-                      <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
-                        <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
-                      </div>
-                      <div className="absolute -right-16 top-0 text-white font-bold text-xl">2026</div>
                     </div>
                   </div>
                 </div>
@@ -827,107 +832,109 @@ export default function Home() {
             <div
               className={`transition-all duration-1000 transform ${visibleSections.projects ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             >
-              <div className="text-center mb-16 relative">
-                <h2 className="text-5xl font-bold text-gray-200 inline-block relative">
+              <div className="text-center mb-12 relative">
+                <h2 className="text-4xl sm:text-5xl font-bold text-gray-200 inline-block relative">
                   My Projects
                   <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#a8c5ff] to-transparent"></div>
                 </h2>
-                <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
+                <p className="text-gray-400 mt-6 max-w-2xl mx-auto px-4">
                   Explore my portfolio of projects showcasing my skills in web development, design, and problem-solving.
                 </p>
               </div>
 
-              {/* Project Categories */}
-              <div className="flex justify-center gap-3 mb-12 flex-wrap">
-                <button className="px-4 py-2 bg-[#0a2547]/80 text-[#a8c5ff] rounded-full text-sm font-medium border border-[#4d8bf5]/30 hover:bg-[#0a2547] hover:border-[#4d8bf5]/60 transition-all">
+              {/* Project Categories - Mobile optimized */}
+              <div className="flex justify-center gap-2 sm:gap-3 mb-10 flex-wrap px-2">
+                <button className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[#0a2547]/80 text-[#a8c5ff] rounded-full text-xs sm:text-sm font-medium border border-[#4d8bf5]/30 hover:bg-[#0a2547] hover:border-[#4d8bf5]/60 transition-all">
                   All Projects
                 </button>
-                <button className="px-4 py-2 bg-transparent text-gray-400 rounded-full text-sm font-medium border border-gray-500/30 hover:bg-[#0a2547]/50 hover:text-[#a8c5ff] hover:border-[#4d8bf5]/30 transition-all">
+                <button className="px-3 py-1.5 sm:px-4 sm:py-2 bg-transparent text-gray-400 rounded-full text-xs sm:text-sm font-medium border border-gray-500/30 hover:bg-[#0a2547]/50 hover:text-[#a8c5ff] hover:border-[#4d8bf5]/30 transition-all">
                   React
                 </button>
-                <button className="px-4 py-2 bg-transparent text-gray-400 rounded-full text-sm font-medium border border-gray-500/30 hover:bg-[#0a2547]/50 hover:text-[#a8c5ff] hover:border-[#4d8bf5]/30 transition-all">
+                <button className="px-3 py-1.5 sm:px-4 sm:py-2 bg-transparent text-gray-400 rounded-full text-xs sm:text-sm font-medium border border-gray-500/30 hover:bg-[#0a2547]/50 hover:text-[#a8c5ff] hover:border-[#4d8bf5]/30 transition-all">
                   JavaScript
                 </button>
-                <button className="px-4 py-2 bg-transparent text-gray-400 rounded-full text-sm font-medium border border-gray-500/30 hover:bg-[#0a2547]/50 hover:text-[#a8c5ff] hover:border-[#4d8bf5]/30 transition-all">
+                <button className="px-3 py-1.5 sm:px-4 sm:py-2 bg-transparent text-gray-400 rounded-full text-xs sm:text-sm font-medium border border-gray-500/30 hover:bg-[#0a2547]/50 hover:text-[#a8c5ff] hover:border-[#4d8bf5]/30 transition-all">
                   HTML/CSS
                 </button>
               </div>
 
-              {/* Featured Project */}
-              <div className="mb-16 perspective">
+              {/* Featured Project - Mobile optimized */}
+              <div className="mb-12 perspective">
                 <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#0c2c5a] to-[#051428]/90 border border-[#4d8bf5]/30 shadow-lg shadow-[#4d8bf5]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/50">
                   <div className="absolute top-4 left-4 bg-[#4d8bf5] text-white px-3 py-1 rounded-full text-xs font-medium z-20">
                     Featured Project
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6 p-8">
-                    <div className="overflow-hidden rounded-lg group-hover:shadow-lg transition-all duration-500 h-[300px] md:h-auto">
+                  <div className="grid md:grid-cols-2 gap-6 p-6 sm:p-8">
+                    <div className="overflow-hidden rounded-lg group-hover:shadow-lg transition-all duration-500 h-[250px] sm:h-[300px] md:h-auto">
                       {/* Weather App Preview with animated weather elements */}
                       <div className="relative w-full h-full bg-gradient-to-b from-[#0c2c5a] to-[#051428] overflow-hidden border border-[#4d8bf5]/20 rounded-lg">
                         {/* Animated weather elements */}
                         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
                           <div className="absolute top-2 right-2 z-20">
-                            {weatherIcon === "sun" && <Sun className="w-10 h-10 text-yellow-300 animate-pulse-slow" />}
+                            {weatherIcon === "sun" && (
+                              <Sun className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-300 animate-pulse-slow" />
+                            )}
                             {weatherIcon === "cloud" && (
-                              <Cloud className="w-10 h-10 text-gray-300 animate-pulse-slow" />
+                              <Cloud className="w-8 h-8 sm:w-10 sm:h-10 text-gray-300 animate-pulse-slow" />
                             )}
                             {weatherIcon === "rain" && (
-                              <CloudRain className="w-10 h-10 text-blue-300 animate-pulse-slow" />
+                              <CloudRain className="w-8 h-8 sm:w-10 sm:h-10 text-blue-300 animate-pulse-slow" />
                             )}
                           </div>
 
                           {/* Animated clouds */}
                           <div className="absolute top-4 left-4 opacity-20 animate-pulse-slow">
-                            <Cloud className="w-8 h-8 text-white" />
+                            <Cloud className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                           </div>
                           <div
                             className="absolute top-10 right-10 opacity-30 animate-pulse-slow"
                             style={{ animationDelay: "1s" }}
                           >
-                            <Cloud className="w-6 h-6 text-white" />
+                            <Cloud className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                           </div>
                         </div>
 
                         {/* Mock weather app interface */}
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[280px] bg-[#051428]/80 rounded-lg p-5 border border-[#4d8bf5]/30 shadow-lg">
-                          <div className="text-center mb-3">
-                            <p className="text-[#a8c5ff] text-sm">React Weather Application</p>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[220px] sm:max-w-[280px] bg-[#051428]/80 rounded-lg p-4 sm:p-5 border border-[#4d8bf5]/30 shadow-lg">
+                          <div className="text-center mb-2 sm:mb-3">
+                            <p className="text-[#a8c5ff] text-xs sm:text-sm">React Weather Application</p>
                           </div>
-                          <div className="flex justify-center mb-4">
+                          <div className="flex justify-center mb-3 sm:mb-4">
                             <div className="relative w-full">
                               <input
                                 type="text"
-                                className="w-full bg-[#0a2547] border border-[#4d8bf5]/50 rounded-md py-2 px-3 text-sm text-gray-200 focus:outline-none focus:border-[#4d8bf5]/70 transition-colors"
+                                className="w-full bg-[#0a2547] border border-[#4d8bf5]/50 rounded-md py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm text-gray-200 focus:outline-none focus:border-[#4d8bf5]/70 transition-colors"
                                 placeholder="Enter city, zip, or landmark..."
                                 readOnly
                               />
-                              <button className="absolute right-1 top-1 bg-[#FF9500] text-black px-2 py-1 rounded text-xs">
+                              <button className="absolute right-1 top-1 bg-[#FF9500] text-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs">
                                 Search
                               </button>
                             </div>
                           </div>
-                          <div className="flex justify-between items-center bg-[#0a2547]/80 rounded-lg p-3 mb-3">
+                          <div className="flex justify-between items-center bg-[#0a2547]/80 rounded-lg p-2 sm:p-3 mb-2 sm:mb-3">
                             <div>
-                              <p className="text-white text-xl font-bold">74°F</p>
-                              <p className="text-gray-400 text-xs">Washington DC</p>
+                              <p className="text-white text-lg sm:text-xl font-bold">74°F</p>
+                              <p className="text-gray-400 text-[10px] sm:text-xs">Washington DC</p>
                             </div>
-                            <Sun className="w-8 h-8 text-yellow-300" />
+                            <Sun className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-300" />
                           </div>
-                          <div className="grid grid-cols-3 gap-2 text-center">
-                            <div className="bg-[#0a2547]/60 p-2 rounded">
-                              <p className="text-white text-xs">Mon</p>
-                              <Cloud className="w-5 h-5 mx-auto my-1 text-gray-300" />
-                              <p className="text-white text-xs">68°</p>
+                          <div className="grid grid-cols-3 gap-1 sm:gap-2 text-center">
+                            <div className="bg-[#0a2547]/60 p-1 sm:p-2 rounded">
+                              <p className="text-white text-[10px] sm:text-xs">Mon</p>
+                              <Cloud className="w-4 h-4 sm:w-5 sm:h-5 mx-auto my-1 text-gray-300" />
+                              <p className="text-white text-[10px] sm:text-xs">68°</p>
                             </div>
-                            <div className="bg-[#0a2547]/60 p-2 rounded">
-                              <p className="text-white text-xs">Tue</p>
-                              <Sun className="w-5 h-5 mx-auto my-1 text-yellow-300" />
-                              <p className="text-white text-xs">72°</p>
+                            <div className="bg-[#0a2547]/60 p-1 sm:p-2 rounded">
+                              <p className="text-white text-[10px] sm:text-xs">Tue</p>
+                              <Sun className="w-4 h-4 sm:w-5 sm:h-5 mx-auto my-1 text-yellow-300" />
+                              <p className="text-white text-[10px] sm:text-xs">72°</p>
                             </div>
-                            <div className="bg-[#0a2547]/60 p-2 rounded">
-                              <p className="text-white text-xs">Wed</p>
-                              <CloudRain className="w-5 h-5 mx-auto my-1 text-blue-300" />
-                              <p className="text-white text-xs">65°</p>
+                            <div className="bg-[#0a2547]/60 p-1 sm:p-2 rounded">
+                              <p className="text-white text-[10px] sm:text-xs">Wed</p>
+                              <CloudRain className="w-4 h-4 sm:w-5 sm:h-5 mx-auto my-1 text-blue-300" />
+                              <p className="text-white text-[10px] sm:text-xs">65°</p>
                             </div>
                           </div>
                         </div>
@@ -935,7 +942,7 @@ export default function Home() {
                     </div>
 
                     <div className="flex flex-col justify-center">
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
                         <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">React</span>
                         <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">
                           API Integration
@@ -945,9 +952,9 @@ export default function Home() {
                         </span>
                       </div>
 
-                      <h3 className="text-3xl font-bold text-white mb-4">Weather Application</h3>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Weather Application</h3>
 
-                      <p className="text-gray-300 mb-6">
+                      <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                         A React-based weather application that provides real-time weather information with a sleek,
                         intuitive interface. Users can search for locations, view current conditions, and check the
                         5-day forecast. The app features dynamic themes that change based on weather conditions.
@@ -958,10 +965,10 @@ export default function Home() {
                           href="https://nengiikoli.github.io/Weather-React-Project/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="relative overflow-hidden group flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-6 py-3 rounded-md text-sm transition-all duration-300 hover:bg-[#3a78e0]"
+                          className="relative overflow-hidden group flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md text-xs sm:text-sm transition-all duration-300 hover:bg-[#3a78e0]"
                         >
                           <span>View Live Demo</span>
-                          <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                           {/* Button shine effect */}
                           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
                         </a>
@@ -970,10 +977,10 @@ export default function Home() {
                           href="https://github.com/NengiIkoli/Weather-React-Project"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 border border-[#4d8bf5]/50 text-gray-200 px-6 py-3 rounded-md text-sm transition-all duration-300 hover:bg-[#0a2547] hover:text-white group"
+                          className="flex items-center justify-center gap-2 border border-[#4d8bf5]/50 text-gray-200 px-4 sm:px-6 py-2 sm:py-3 rounded-md text-xs sm:text-sm transition-all duration-300 hover:bg-[#0a2547] hover:text-white group"
                         >
                           <span>View Source Code</span>
-                          <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                          <Github className="w-3 h-3 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform" />
                         </a>
                       </div>
                     </div>
@@ -981,41 +988,41 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* UI/UX Portfolio Case Studies */}
-              <div className="mb-16 perspective">
+              {/* UI/UX Portfolio Case Studies - Mobile optimized */}
+              <div className="mb-12 perspective">
                 <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#0c2c5a] to-[#051428]/90 border border-[#4d8bf5]/30 shadow-lg shadow-[#4d8bf5]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/50">
                   <div className="absolute top-4 left-4 bg-[#4d8bf5] text-white px-3 py-1 rounded-full text-xs font-medium z-20">
                     UI/UX Case Studies
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6 p-8">
-                    <div className="overflow-hidden rounded-lg group-hover:shadow-lg transition-all duration-500 h-[300px] md:h-auto">
+                  <div className="grid md:grid-cols-2 gap-6 p-6 sm:p-8">
+                    <div className="overflow-hidden rounded-lg group-hover:shadow-lg transition-all duration-500 h-[250px] sm:h-[300px] md:h-auto">
                       {/* UI/UX Portfolio Preview */}
                       <div className="relative w-full h-full bg-gradient-to-b from-[#0c2c5a] to-[#051428] overflow-hidden border border-[#4d8bf5]/20 rounded-lg">
                         {/* Design elements background */}
                         <div className="absolute inset-0 opacity-10">
-                          <div className="absolute top-5 left-5 w-20 h-20 border-2 border-[#4d8bf5]/30 rounded-lg transform rotate-12"></div>
-                          <div className="absolute bottom-10 right-10 w-16 h-16 border-2 border-[#4d8bf5]/30 rounded-full"></div>
-                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-[#4d8bf5]/30 rounded-lg transform -rotate-12"></div>
+                          <div className="absolute top-5 left-5 w-16 sm:w-20 h-16 sm:h-20 border-2 border-[#4d8bf5]/30 rounded-lg transform rotate-12"></div>
+                          <div className="absolute bottom-10 right-10 w-12 sm:w-16 h-12 sm:h-16 border-2 border-[#4d8bf5]/30 rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 sm:w-32 h-24 sm:h-32 border-2 border-[#4d8bf5]/30 rounded-lg transform -rotate-12"></div>
                         </div>
 
                         {/* Portfolio mockup */}
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[280px] bg-white rounded-lg overflow-hidden shadow-xl">
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[220px] sm:max-w-[280px] bg-white rounded-lg overflow-hidden shadow-xl">
                           {/* Header */}
-                          <div className="bg-gray-800 p-2 flex justify-between items-center">
+                          <div className="bg-gray-800 p-1.5 sm:p-2 flex justify-between items-center">
                             <div className="flex space-x-1">
-                              <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                              <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-yellow-500"></div>
+                              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></div>
                             </div>
-                            <div className="text-white text-xs">UI/UX Portfolio</div>
-                            <div className="w-4"></div>
+                            <div className="text-white text-[10px] sm:text-xs">UI/UX Portfolio</div>
+                            <div className="w-3 sm:w-4"></div>
                           </div>
 
                           {/* Content */}
-                          <div className="p-3">
+                          <div className="p-2 sm:p-3">
                             {/* Navigation */}
-                            <div className="flex justify-between text-xs text-gray-600 mb-3 border-b pb-2">
+                            <div className="flex justify-between text-[8px] sm:text-xs text-gray-600 mb-2 sm:mb-3 border-b pb-1 sm:pb-2">
                               <span className="font-medium">Home</span>
                               <span>Projects</span>
                               <span>About</span>
@@ -1023,27 +1030,27 @@ export default function Home() {
                             </div>
 
                             {/* Project preview */}
-                            <div className="mb-3">
-                              <div className="text-sm font-bold text-gray-800 mb-1">Case Studies</div>
-                              <div className="bg-gray-100 rounded-lg p-2 mb-2">
-                                <div className="h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md mb-1"></div>
-                                <div className="text-xs font-medium">Groove Media App</div>
-                                <div className="text-[10px] text-gray-500">Music Streaming UX Design</div>
+                            <div className="mb-2 sm:mb-3">
+                              <div className="text-[10px] sm:text-sm font-bold text-gray-800 mb-1">Case Studies</div>
+                              <div className="bg-gray-100 rounded-lg p-1.5 sm:p-2 mb-1.5 sm:mb-2">
+                                <div className="h-8 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md mb-1"></div>
+                                <div className="text-[8px] sm:text-xs font-medium">Groove Media App</div>
+                                <div className="text-[6px] sm:text-[10px] text-gray-500">Music Streaming UX Design</div>
                               </div>
-                              <div className="bg-gray-100 rounded-lg p-2">
-                                <div className="h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-md mb-1"></div>
-                                <div className="text-xs font-medium">Savr Recipe App</div>
-                                <div className="text-[10px] text-gray-500">Food App Redesign</div>
+                              <div className="bg-gray-100 rounded-lg p-1.5 sm:p-2">
+                                <div className="h-8 sm:h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-md mb-1"></div>
+                                <div className="text-[8px] sm:text-xs font-medium">Savr Recipe App</div>
+                                <div className="text-[6px] sm:text-[10px] text-gray-500">Food App Redesign</div>
                               </div>
                             </div>
 
                             {/* Footer */}
-                            <div className="flex justify-between items-center text-[10px] text-gray-500 pt-1 border-t">
+                            <div className="flex justify-between items-center text-[6px] sm:text-[10px] text-gray-500 pt-1 border-t">
                               <span>© 2024 Nengi Ikoli</span>
                               <div className="flex space-x-1">
-                                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-                                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-                                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-gray-300"></div>
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-gray-300"></div>
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-gray-300"></div>
                               </div>
                             </div>
                           </div>
@@ -1059,20 +1066,22 @@ export default function Home() {
                         <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">Prototyping</span>
                       </div>
 
-                      <h3 className="text-3xl font-bold text-white mb-4">UI/UX Portfolio Case Studies</h3>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
+                        UI/UX Portfolio Case Studies
+                      </h3>
 
-                      <p className="text-gray-300 mb-6">
+                      <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
                         A collection of in-depth UI/UX case studies showcasing my design process, problem-solving
                         approach, and user-centered design methodology. These projects demonstrate my ability to create
                         intuitive, engaging, and accessible digital experiences.
                       </p>
 
-                      <div className="space-y-3 mb-6">
+                      <div className="space-y-3 mb-4 sm:mb-6">
                         <div className="flex items-start">
                           <div className="w-5 h-5 rounded-full bg-[#4d8bf5] flex items-center justify-center mt-0.5 mr-3">
                             <span className="text-xs text-white font-bold">1</span>
                           </div>
-                          <p className="text-gray-300 flex-1">
+                          <p className="text-gray-300 flex-1 text-sm sm:text-base">
                             <span className="font-medium text-white">Groove Media App:</span> A music streaming
                             application designed to enhance user engagement through personalized playlists and social
                             sharing features
@@ -1082,7 +1091,7 @@ export default function Home() {
                           <div className="w-5 h-5 rounded-full bg-[#4d8bf5] flex items-center justify-center mt-0.5 mr-3">
                             <span className="text-xs text-white font-bold">2</span>
                           </div>
-                          <p className="text-gray-300 flex-1">
+                          <p className="text-gray-300 flex-1 text-sm sm:text-base">
                             <span className="font-medium text-white">Savr Recipe App:</span> A redesign of a startup
                             cooking application to address user feedback and improve usability
                           </p>
@@ -1091,7 +1100,7 @@ export default function Home() {
                           <div className="w-5 h-5 rounded-full bg-[#4d8bf5] flex items-center justify-center mt-0.5 mr-3">
                             <span className="text-xs text-white font-bold">3</span>
                           </div>
-                          <p className="text-gray-300 flex-1">
+                          <p className="text-gray-300 flex-1 text-sm sm:text-base">
                             <span className="font-medium text-white">Flip & Floss Industry Design Project:</span> A
                             user-centric reward system interface designed for a financial literacy application targeting
                             young users with gamified elements
@@ -1104,10 +1113,10 @@ export default function Home() {
                           href="https://ikolinengi.wixsite.com/porfolio"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="relative overflow-hidden group flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-6 py-3 rounded-md text-sm transition-all duration-300 hover:bg-[#3a78e0]"
+                          className="relative overflow-hidden group flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md text-xs sm:text-sm transition-all duration-300 hover:bg-[#3a78e0]"
                         >
                           <span>View Case Studies</span>
-                          <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                           {/* Button shine effect */}
                           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
                         </a>
@@ -1117,8 +1126,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Projects Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Projects Grid - Mobile optimized */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* IT Team Members HTML Project */}
                 <div className="group perspective transform transition-all duration-500 hover:scale-[1.02]">
                   <div className="relative bg-gradient-to-br from-[#0a2547] to-[#0f3166] rounded-xl overflow-hidden border border-gray-500/20 h-full shadow-lg transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/30">
@@ -1129,9 +1138,9 @@ export default function Home() {
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#4d8bf5]/0 via-[#4d8bf5] to-[#4d8bf5]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
 
                     {/* Content */}
-                    <div className="relative z-10 p-6 flex flex-col h-full">
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-3 py-1 rounded text-xs font-medium">
+                    <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-3 sm:mb-4">
+                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-2 sm:px-3 py-1 rounded text-xs font-medium">
                           HTML/CSS
                         </div>
                         <div className="flex items-center gap-2">
@@ -1140,49 +1149,49 @@ export default function Home() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Github className="w-5 h-5 text-gray-400 hover:text-gray-200 transition-colors" />
+                            <Github className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-gray-200 transition-colors" />
                           </a>
                           <a
                             href="https://nengiikoli.github.io/IT-Members-Webpage-HTML-/"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <ExternalLink className="w-5 h-5 text-gray-400 hover:text-gray-200 transition-colors" />
+                            <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-gray-200 transition-colors" />
                           </a>
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-bold text-white mb-3">IT Team Members</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">IT Team Members</h3>
 
                       {/* Project preview */}
-                      <div className="mt-2 mb-4 overflow-hidden rounded-md border border-[#4d8bf5]/20 group-hover:border-[#4d8bf5]/40 transition-colors">
+                      <div className="mt-2 mb-3 sm:mb-4 overflow-hidden rounded-md border border-[#4d8bf5]/20 group-hover:border-[#4d8bf5]/40 transition-colors">
                         <div className="bg-[#051428] px-2 py-1 border-b border-[#4d8bf5]/20 flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                          <div className="text-gray-400 text-xs ml-2">index.html</div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-yellow-500"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></div>
+                          <div className="text-gray-400 text-[10px] sm:text-xs ml-2">index.html</div>
                         </div>
-                        <div className="p-3 bg-white text-black text-xs">
-                          <div className="font-semibold text-lg mb-2">IT Team Members</div>
-                          <div className="mb-3">
+                        <div className="p-2 sm:p-3 bg-white text-black text-[10px] sm:text-xs">
+                          <div className="font-semibold text-sm sm:text-lg mb-1 sm:mb-2">IT Team Members</div>
+                          <div className="mb-2 sm:mb-3">
                             <div className="font-medium mb-1">Add New Member</div>
-                            <div className="grid grid-cols-2 gap-1 mb-2">
+                            <div className="grid grid-cols-2 gap-1 mb-1 sm:mb-2">
                               <div>First Name:</div>
-                              <div className="h-4 bg-gray-100 border border-gray-300 rounded"></div>
+                              <div className="h-3 sm:h-4 bg-gray-100 border border-gray-300 rounded"></div>
                               <div>Last Name:</div>
-                              <div className="h-4 bg-gray-100 border border-gray-300 rounded"></div>
+                              <div className="h-3 sm:h-4 bg-gray-100 border border-gray-300 rounded"></div>
                               <div>Role:</div>
-                              <div className="h-4 bg-gray-100 border border-gray-300 rounded"></div>
+                              <div className="h-3 sm:h-4 bg-gray-100 border border-gray-300 rounded"></div>
                               <div>Email:</div>
-                              <div className="h-4 bg-gray-100 border border-gray-300 rounded"></div>
+                              <div className="h-3 sm:h-4 bg-gray-100 border border-gray-300 rounded"></div>
                             </div>
-                            <button className="bg-gray-200 border border-gray-400 text-xs px-2 py-0.5 rounded">
+                            <button className="bg-gray-200 border border-gray-400 text-[8px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded">
                               Add Member
                             </button>
                           </div>
                           <div>
                             <div className="font-medium mb-1">Team Members</div>
-                            <table className="w-full border-collapse border border-gray-300 text-[10px]">
+                            <table className="w-full border-collapse border border-gray-300 text-[8px] sm:text-[10px]">
                               <thead className="bg-gray-100">
                                 <tr>
                                   <th className="border border-gray-300 p-0.5">First Name</th>
@@ -1210,29 +1219,29 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <p className="text-gray-400 mb-4 flex-grow">
+                      <p className="text-gray-400 mb-4 flex-grow text-xs sm:text-sm">
                         A straightforward HTML webpage for managing IT team members with a form for adding new members
                         and a structured table displaying team information.
                       </p>
 
-                      <div className="mt-auto flex gap-4">
+                      <div className="mt-auto flex gap-3 sm:gap-4">
                         <a
                           href="https://nengiikoli.github.io/IT-Members-Webpage-HTML-/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 border border-gray-500/30 text-gray-300 hover:border-[#4d8bf5]/50 hover:text-white px-4 py-2 rounded-md text-sm transition-all duration-300 group-hover:bg-[#051428]/80"
+                          className="flex items-center gap-1 sm:gap-2 border border-gray-500/30 text-gray-300 hover:border-[#4d8bf5]/50 hover:text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs transition-all duration-300 group-hover:bg-[#051428]/80"
                         >
                           <span>Demo</span>
-                          <ExternalLink className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                          <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
                         </a>
                         <a
                           href="https://github.com/NengiIkoli/IT-Members-Webpage-HTML-"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-4 py-2 rounded-md text-sm transition-all duration-300"
+                          className="flex items-center gap-1 sm:gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs transition-all duration-300"
                         >
                           <span>Source</span>
-                          <Github className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                          <Github className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:scale-110 transition-transform" />
                         </a>
                       </div>
                     </div>
@@ -1250,9 +1259,9 @@ export default function Home() {
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#4d8bf5]/0 via-[#4d8bf5] to-[#4d8bf5]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
 
                     {/* Content */}
-                    <div className="relative z-10 p-6 flex flex-col h-full">
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-3 py-1 rounded text-xs font-medium">
+                    <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-3 sm:mb-4">
+                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-2 sm:px-3 py-1 rounded text-xs font-medium">
                           JavaScript
                         </div>
                         <div className="flex items-center gap-2">
@@ -1261,67 +1270,69 @@ export default function Home() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Github className="w-5 h-5 text-gray-400 hover:text-gray-200 transition-colors" />
+                            <Github className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-gray-200 transition-colors" />
                           </a>
                           <a
                             href="https://nengiikoli.github.io/Bookstore-DOM-Project/"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <ExternalLink className="w-5 h-5 text-gray-400 hover:text-gray-200 transition-colors" />
+                            <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-gray-200 transition-colors" />
                           </a>
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-bold text-white mb-3">Bookstore Manager</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Bookstore Manager</h3>
 
                       {/* Project preview */}
-                      <div className="mt-2 mb-4 rounded-md border border-[#4d8bf5]/20 overflow-hidden group-hover:border-[#4d8bf5]/40 transition-colors">
+                      <div className="mt-2 mb-3 sm:mb-4 rounded-md border border-[#4d8bf5]/20 overflow-hidden group-hover:border-[#4d8bf5]/40 transition-colors">
                         <div className="bg-[#051428] px-2 py-1 border-b border-[#4d8bf5]/20 flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                          <div className="text-gray-400 text-xs ml-2">bookstore.js</div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-yellow-500"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></div>
+                          <div className="text-gray-400 text-[10px] sm:text-xs ml-2">bookstore.js</div>
                         </div>
-                        <div className="bg-white p-3">
-                          <div className="text-center text-gray-800 font-medium mb-2">Welcome to the Book Store!</div>
-                          <div className="bg-gray-100 p-2 rounded mb-2">
-                            <div className="text-xs text-gray-600 mb-1">Add a Book to the Store</div>
-                            <div className="h-5 bg-white rounded border border-gray-300 mb-1"></div>
-                            <div className="h-5 bg-white rounded border border-gray-300 mb-1"></div>
-                            <div className="h-5 bg-white rounded border border-gray-300 mb-1"></div>
-                            <div className="h-6 bg-blue-500 rounded text-center">
-                              <span className="text-white text-xs">Add Book</span>
+                        <div className="bg-white p-2 sm:p-3">
+                          <div className="text-center text-gray-800 font-medium mb-1 sm:mb-2 text-xs sm:text-sm">
+                            Welcome to the Book Store!
+                          </div>
+                          <div className="bg-gray-100 p-1.5 sm:p-2 rounded mb-1.5 sm:mb-2">
+                            <div className="text-[8px] sm:text-xs text-gray-600 mb-1">Add a Book to the Store</div>
+                            <div className="h-4 sm:h-5 bg-white rounded border border-gray-300 mb-1"></div>
+                            <div className="h-4 sm:h-5 bg-white rounded border border-gray-300 mb-1"></div>
+                            <div className="h-4 sm:h-5 bg-white rounded border border-gray-300 mb-1"></div>
+                            <div className="h-5 sm:h-6 bg-blue-500 rounded text-center">
+                              <span className="text-white text-[8px] sm:text-xs">Add Book</span>
                             </div>
                           </div>
-                          <div className="text-xs text-gray-600">Books in Stock</div>
-                          <div className="h-20 bg-gray-50 rounded border border-gray-200"></div>
+                          <div className="text-[8px] sm:text-xs text-gray-600">Books in Stock</div>
+                          <div className="h-16 sm:h-20 bg-gray-50 rounded border border-gray-200"></div>
                         </div>
                       </div>
 
-                      <p className="text-gray-400 mb-4 flex-grow">
+                      <p className="text-gray-400 mb-4 flex-grow text-xs sm:text-sm">
                         A JavaScript bookstore application that demonstrates DOM manipulation by allowing users to add,
                         display, and remove books with persistent local storage.
                       </p>
 
-                      <div className="mt-auto flex gap-4">
+                      <div className="mt-auto flex gap-3 sm:gap-4">
                         <a
                           href="https://nengiikoli.github.io/Bookstore-DOM-Project/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 border border-gray-500/30 text-gray-300 hover:border-[#4d8bf5]/50 hover:text-white px-4 py-2 rounded-md text-sm transition-all duration-300 group-hover:bg-[#051428]/80"
+                          className="flex items-center gap-1 sm:gap-2 border border-gray-500/30 text-gray-300 hover:border-[#4d8bf5]/50 hover:text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs transition-all duration-300 group-hover:bg-[#051428]/80"
                         >
                           <span>Demo</span>
-                          <ExternalLink className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                          <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
                         </a>
                         <a
                           href="https://github.com/NengiIkoli/Bookstore-DOM-Project"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-4 py-2 rounded-md text-sm transition-all duration-300"
+                          className="flex items-center gap-1 sm:gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs transition-all duration-300"
                         >
                           <span>Source</span>
-                          <Github className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                          <Github className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:scale-110 transition-transform" />
                         </a>
                       </div>
                     </div>
@@ -1338,9 +1349,9 @@ export default function Home() {
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#4d8bf5]/0 via-[#4d8bf5] to-[#4d8bf5]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
 
                     {/* Content */}
-                    <div className="relative z-10 p-6 flex flex-col h-full">
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-3 py-1 rounded text-xs font-medium">
+                    <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-3 sm:mb-4">
+                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-2 sm:px-3 py-1 rounded text-xs font-medium">
                           HTML/CSS
                         </div>
                         <div className="flex items-center gap-2">
@@ -1349,90 +1360,94 @@ export default function Home() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Github className="w-5 h-5 text-gray-400 hover:text-gray-200 transition-colors" />
+                            <Github className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-gray-200 transition-colors" />
                           </a>
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-bold text-white mb-3">Email Template Webpage</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Email Template Webpage</h3>
 
                       {/* Project preview */}
-                      <div className="mt-2 mb-4 rounded-md border border-[#4d8bf5]/20 overflow-hidden group-hover:border-[#4d8bf5]/40 transition-colors">
+                      <div className="mt-2 mb-3 sm:mb-4 rounded-md border border-[#4d8bf5]/20 overflow-hidden group-hover:border-[#4d8bf5]/40 transition-colors">
                         <div className="bg-[#051428] px-2 py-1 border-b border-[#4d8bf5]/20 flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                          <div className="text-gray-400 text-xs ml-2">Email Client</div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-yellow-500"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></div>
+                          <div className="text-gray-400 text-[10px] sm:text-xs ml-2">Email Client</div>
                         </div>
                         <div className="flex">
                           {/* Left sidebar */}
-                          <div className="bg-gray-800 p-2 w-1/4">
-                            <div className="flex items-center gap-2 mb-2">
-                              <div className="w-5 h-5 rounded-full bg-blue-500"></div>
-                              <div className="text-white text-xs">Welcome, Brock!</div>
+                          <div className="bg-gray-800 p-1.5 sm:p-2 w-1/4">
+                            <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-blue-500"></div>
+                              <div className="text-white text-[8px] sm:text-xs">Welcome, Brock!</div>
                             </div>
-                            <div className="bg-orange-500 text-white text-xs py-1 px-2 rounded text-center mb-2">
+                            <div className="bg-orange-500 text-white text-[8px] sm:text-xs py-0.5 sm:py-1 px-1.5 sm:px-2 rounded text-center mb-1 sm:mb-2">
                               Compose
                             </div>
-                            <div className="text-gray-300 text-xs mb-1">Inbox (1)</div>
-                            <div className="text-gray-400 text-xs mb-1">Tagged</div>
-                            <div className="text-gray-400 text-xs mb-1">Important</div>
-                            <div className="text-gray-400 text-xs">Sent Mail</div>
+                            <div className="text-gray-300 text-[8px] sm:text-xs mb-0.5 sm:mb-1">Inbox (1)</div>
+                            <div className="text-gray-400 text-[8px] sm:text-xs mb-0.5 sm:mb-1">Tagged</div>
+                            <div className="text-gray-400 text-[8px] sm:text-xs mb-0.5 sm:mb-1">Important</div>
+                            <div className="text-gray-400 text-[8px] sm:text-xs">Sent Mail</div>
                           </div>
 
                           {/* Middle section */}
-                          <div className="bg-gray-200 p-2 w-1/3">
-                            <div className="bg-white rounded mb-2 h-5"></div>
-                            <div className="text-xs font-medium mb-1">LinkedIn</div>
-                            <div className="bg-gray-300 rounded p-1 mb-1">
-                              <div className="text-xs truncate">New connection request</div>
+                          <div className="bg-gray-200 p-1.5 sm:p-2 w-1/3">
+                            <div className="bg-white rounded mb-1 sm:mb-2 h-4 sm:h-5"></div>
+                            <div className="text-[8px] sm:text-xs font-medium mb-0.5 sm:mb-1">LinkedIn</div>
+                            <div className="bg-gray-300 rounded p-0.5 sm:p-1 mb-0.5 sm:mb-1">
+                              <div className="text-[8px] sm:text-xs truncate">New connection request</div>
                             </div>
-                            <div className="text-xs font-medium">Michael Scott Daily Quote</div>
-                            <div className="bg-gray-300 rounded p-1">
-                              <div className="text-xs truncate">I'm optimistic because...</div>
+                            <div className="text-[8px] sm:text-xs font-medium">Michael Scott Daily Quote</div>
+                            <div className="bg-gray-300 rounded p-0.5 sm:p-1">
+                              <div className="text-[8px] sm:text-xs truncate">I'm optimistic because...</div>
                             </div>
                           </div>
 
                           {/* Right section - email content */}
-                          <div className="bg-white p-2 w-5/12">
-                            <div className="text-xs mb-1">
+                          <div className="bg-white p-1.5 sm:p-2 w-5/12">
+                            <div className="text-[8px] sm:text-xs mb-0.5 sm:mb-1">
                               <span className="font-medium">To:</span> taylor@example.com
                             </div>
-                            <div className="text-xs mb-2">
+                            <div className="text-[8px] sm:text-xs mb-1 sm:mb-2">
                               <span className="font-medium">From:</span> michael@quotes.com
                             </div>
-                            <div className="font-medium text-xs mb-1">Michael Scott Daily Quotes</div>
-                            <div className="text-xs mb-1">"Friends joke with one another..."</div>
-                            <div className="text-xs mb-1">"It's a good thing Russia..."</div>
-                            <div className="bg-gray-100 rounded h-6 mt-2"></div>
-                            <div className="bg-orange-500 w-16 h-4 rounded mt-1 ml-auto"></div>
+                            <div className="font-medium text-[8px] sm:text-xs mb-0.5 sm:mb-1">
+                              Michael Scott Daily Quotes
+                            </div>
+                            <div className="text-[8px] sm:text-xs mb-0.5 sm:mb-1">
+                              "Friends joke with one another..."
+                            </div>
+                            <div className="text-[8px] sm:text-xs mb-0.5 sm:mb-1">"It's a good thing Russia..."</div>
+                            <div className="bg-gray-100 rounded h-4 sm:h-6 mt-1 sm:mt-2"></div>
+                            <div className="bg-orange-500 w-12 sm:w-16 h-3 sm:h-4 rounded mt-0.5 sm:mt-1 ml-auto"></div>
                           </div>
                         </div>
                       </div>
 
-                      <p className="text-gray-400 mb-4 flex-grow">
+                      <p className="text-gray-400 mb-4 flex-grow text-xs sm:text-sm">
                         A meticulously designed email client interface with sidebar navigation, message list, and email
                         content view. Features user welcome, compose button, and organized folder structure.
                       </p>
 
-                      <div className="mt-auto flex gap-4">
+                      <div className="mt-auto flex gap-3 sm:gap-4">
                         <a
                           href="https://nengiikoli.github.io/Email-Webpage/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 border border-gray-500/30 text-gray-300 hover:border-[#4d8bf5]/50 hover:text-white px-4 py-2 rounded-md text-sm transition-all duration-300 group-hover:bg-[#051428]/80"
+                          className="flex items-center gap-1 sm:gap-2 border border-gray-500/30 text-gray-300 hover:border-[#4d8bf5]/50 hover:text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs transition-all duration-300 group-hover:bg-[#051428]/80"
                         >
                           <span>Demo</span>
-                          <ExternalLink className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                          <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
                         </a>
                         <a
                           href="https://github.com/NengiIkoli/Email-Webpage"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-4 py-2 rounded-md text-sm transition-all duration-300"
+                          className="flex items-center gap-1 sm:gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs transition-all duration-300"
                         >
                           <span>Source</span>
-                          <Github className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                          <Github className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:scale-110 transition-transform" />
                         </a>
                       </div>
                     </div>
@@ -1441,15 +1456,15 @@ export default function Home() {
               </div>
 
               {/* View More Projects Button */}
-              <div className="mt-12 text-center">
+              <div className="mt-10 sm:mt-12 text-center">
                 <a
                   href="https://github.com/NengiIkoli"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#051428] border border-[#4d8bf5]/50 text-gray-200 px-8 py-3 rounded-md transition-all duration-300 hover:bg-[#0a2547] hover:text-white group"
+                  className="inline-flex items-center gap-2 bg-[#051428] border border-[#4d8bf5]/50 text-gray-200 px-6 sm:px-8 py-2.5 sm:py-3 rounded-md transition-all duration-300 hover:bg-[#0a2547] hover:text-white group text-sm sm:text-base"
                 >
                   <span>View More Projects</span>
-                  <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <Github className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
             </div>
@@ -1461,6 +1476,8 @@ export default function Home() {
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#0a2547]/30 to-transparent"></div>
             <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-[#0a2547]/20 to-transparent"></div>
+
+            {/* Subtle animated dots */}
             <div className="absolute inset-0">
               <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-[#a8c5ff]/30 animate-pulse-slow"></div>
               <div
@@ -1482,7 +1499,7 @@ export default function Home() {
             <div
               className={`transition-all duration-1000 transform ${visibleSections.contact ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             >
-              <div className="text-center mb-8 md:mb-12 relative">
+              <div className="text-center mb-10 md:mb-14 relative">
                 <h2 className="text-4xl md:text-5xl font-bold text-white inline-block relative">
                   Get In Touch
                   <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#a8c5ff] to-transparent"></div>
@@ -1492,65 +1509,90 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="max-w-2xl mx-auto">
-                <div className="bg-gradient-to-br from-[#051428] to-[#0a2547] rounded-xl border border-gray-500/20 shadow-lg overflow-hidden p-5 md:p-8">
-                  <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-                    {/* Left side - Email info */}
-                    <div className="w-full md:w-1/2 text-center md:text-left">
-                      <Mail className="w-12 h-12 text-[#4d8bf5] mx-auto md:mx-0 mb-3" />
-                      <h3 className="text-xl font-bold text-white mb-2">Send Me an Email</h3>
-                      <p className="text-gray-300 text-sm mb-4">
+              <div className="max-w-3xl mx-auto">
+                <div className="bg-gradient-to-br from-[#051428] to-[#0a2547] rounded-2xl border border-[#4d8bf5]/20 shadow-lg shadow-[#4d8bf5]/5 overflow-hidden">
+                  {/* Contact card with refined design */}
+                  <div className="p-6 md:p-10">
+                    {/* Email section */}
+                    <div className="flex flex-col items-center text-center mb-10">
+                      <div className="w-16 h-16 rounded-full bg-[#0a2547] border border-[#4d8bf5]/40 flex items-center justify-center mb-4 shadow-lg shadow-[#4d8bf5]/10">
+                        <Mail className="w-8 h-8 text-[#4d8bf5]" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-3">Email Me</h3>
+                      <p className="text-gray-300 text-sm mb-5 max-w-md">
                         The quickest way to reach me is through my email. I typically respond within 24-48 hours.
                       </p>
                       <a
                         href="mailto:ikolinengi@gmail.com"
-                        className="inline-flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-[#3a78e0] hover:scale-105 text-sm md:text-base w-full md:w-auto"
+                        className="inline-flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-6 py-3 rounded-md transition-all duration-300 hover:bg-[#3a78e0] hover:scale-105 text-sm md:text-base"
                       >
                         <Mail className="w-4 h-4" />
                         <span>ikolinengi@gmail.com</span>
                       </a>
                     </div>
 
-                    {/* Divider for mobile */}
-                    <div className="w-full h-px bg-gray-700/50 my-6 md:hidden"></div>
+                    {/* Divider */}
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-[#4d8bf5]/30 to-transparent my-8"></div>
 
-                    {/* Vertical divider for desktop */}
-                    <div className="hidden md:block w-px h-40 bg-gray-700/50"></div>
-
-                    {/* Right side - Social links */}
-                    <div className="w-full md:w-1/2 text-center md:text-left">
-                      <h3 className="text-xl font-bold text-white mb-3">Connect With Me</h3>
-                      <p className="text-gray-300 text-sm mb-4">
+                    {/* Social connections */}
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold text-white mb-3">Connect With Me</h3>
+                      <p className="text-gray-300 text-sm mb-6 max-w-md mx-auto">
                         Follow me on social media to see my latest projects and updates.
                       </p>
-                      <div className="flex justify-center md:justify-start gap-4">
+
+                      <div className="flex justify-center gap-6">
                         <a
                           href="https://www.linkedin.com/in/ayebanengiyefaikoli/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-[#0a2547] p-3 rounded-full flex items-center justify-center border border-gray-500/30 hover:border-[#4d8bf5]/50 transition-all duration-300 group hover:scale-110"
+                          className="group"
                         >
-                          <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-[#4d8bf5] transition-colors" />
+                          <div className="w-14 h-14 bg-[#0a2547] rounded-full flex items-center justify-center border border-[#4d8bf5]/30 transition-all duration-300 group-hover:border-[#4d8bf5]/70 group-hover:shadow-lg group-hover:shadow-[#4d8bf5]/20 group-hover:scale-110">
+                            <Linkedin className="w-6 h-6 text-gray-300 group-hover:text-[#4d8bf5] transition-colors duration-300" />
+                          </div>
+                          <p className="mt-2 text-xs text-gray-400 group-hover:text-[#a8c5ff] transition-colors duration-300">
+                            LinkedIn
+                          </p>
                         </a>
+
                         <a
                           href="https://github.com/NengiIkoli"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-[#0a2547] p-3 rounded-full flex items-center justify-center border border-gray-500/30 hover:border-[#4d8bf5]/50 transition-all duration-300 group hover:scale-110"
+                          className="group"
                         >
-                          <Github className="w-5 h-5 text-gray-400 group-hover:text-[#4d8bf5] transition-colors" />
+                          <div className="w-14 h-14 bg-[#0a2547] rounded-full flex items-center justify-center border border-[#4d8bf5]/30 transition-all duration-300 group-hover:border-[#4d8bf5]/70 group-hover:shadow-lg group-hover:shadow-[#4d8bf5]/20 group-hover:scale-110">
+                            <Github className="w-6 h-6 text-gray-300 group-hover:text-[#4d8bf5] transition-colors duration-300" />
+                          </div>
+                          <p className="mt-2 text-xs text-gray-400 group-hover:text-[#a8c5ff] transition-colors duration-300">
+                            GitHub
+                          </p>
                         </a>
+
                         <a
                           href="https://ikolinengi.wixsite.com/porfolio"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-[#0a2547] p-3 rounded-full flex items-center justify-center border border-gray-500/30 hover:border-[#4d8bf5]/50 transition-all duration-300 group hover:scale-110"
+                          className="group"
                         >
-                          <Palette className="w-5 h-5 text-gray-400 group-hover:text-[#4d8bf5] transition-colors" />
+                          <div className="w-14 h-14 bg-[#0a2547] rounded-full flex items-center justify-center border border-[#4d8bf5]/30 transition-all duration-300 group-hover:border-[#4d8bf5]/70 group-hover:shadow-lg group-hover:shadow-[#4d8bf5]/20 group-hover:scale-110">
+                            <Palette className="w-6 h-6 text-gray-300 group-hover:text-[#4d8bf5] transition-colors duration-300" />
+                          </div>
+                          <p className="mt-2 text-xs text-gray-400 group-hover:text-[#a8c5ff] transition-colors duration-300">
+                            Portfolio
+                          </p>
                         </a>
                       </div>
                     </div>
                   </div>
+                </div>
+
+                {/* Additional contact info */}
+                <div className="mt-8 text-center">
+                  <p className="text-gray-400 text-sm">
+                    Based in <span className="text-[#a8c5ff]">Washington DC</span> • Available for remote work worldwide
+                  </p>
                 </div>
               </div>
             </div>
