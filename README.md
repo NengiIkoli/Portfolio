@@ -1,22 +1,33 @@
-# Nengi Ikoli – Portfolio Website
+# Nengi Ikoli Portfolio
 
-Welcome to my personal portfolio! I’m a UI/UX Designer & Front-End Developer based in Washington, DC, focused on creating beautiful and intuitive web experiences through modern, user-centered design.
+This is the source code for Nengi Ikoli's personal portfolio website.
 
-## Live Website  
-🔗 [View Portfolio](https://nengiikoliportfolio.netlify.app)
+## Environment Variables
 
-## Tech Stack
-- Next.js
-- React
-- Tailwind CSS
-- TypeScript
-- Netlify (Hosting)
+To enable the contact form functionality, you need to set up the following environment variables in a `.env.local` file at the root of the project:
 
-## 📄 Features
-- Smooth scrolling + animated sections
-- Custom resume button (links to Google Doc)
-- Mobile-responsive design
-- Clean UI with strong visuals
+\`\`\`
+# Email Configuration
+EMAIL_TO=ikolinengi1@gmail.com
+RESEND_API_KEY=your_resend_api_key_here
+\`\`\`
 
-## 📬 Contact  
-Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/ayebanengiyefaikoli/)
+### Setting up Resend for email delivery
+
+This project uses [Resend](https://resend.com/) for reliable email delivery in serverless environments:
+
+1. Sign up for a free Resend account at https://resend.com/
+2. Create an API key
+3. Add the API key to your environment variables as `RESEND_API_KEY`
+
+## Development
+
+\`\`\`bash
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+\`\`\`
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

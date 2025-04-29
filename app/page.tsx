@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
@@ -22,22 +20,6 @@ import {
 } from "lucide-react"
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  })
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(null)
   const [activeSection, setActiveSection] = useState("home")
   const [weatherIcon, setWeatherIcon] = useState<"sun" | "cloud" | "rain">("sun")
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({
@@ -46,6 +28,7 @@ export default function Home() {
     projects: false,
     contact: false,
   })
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Intersection Observer for animations
   useEffect(() => {
@@ -163,81 +146,6 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const validateForm = () => {
-    let valid = true
-    const newErrors = { name: "", email: "", phone: "", subject: "", message: "" }
-
-    // Name validation
-    if (!formData.name) {
-      newErrors.name = "Name is required"
-      valid = false
-    }
-
-    // Email validation
-    if (!formData.email) {
-      newErrors.email = "Email is required"
-      valid = false
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid"
-      valid = false
-    }
-
-    // Subject validation
-    if (!formData.subject) {
-      newErrors.subject = "Subject is required"
-      valid = false
-    }
-
-    // Message validation
-    if (!formData.message) {
-      newErrors.message = "Message is required"
-      valid = false
-    }
-
-    setErrors(newErrors)
-    return valid
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-
-    // Clear error when user types
-    if (errors[name as keyof typeof errors]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }))
-    }
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    // Reset status
-    setSubmitStatus(null)
-
-    // Validate form
-    if (!validateForm()) return
-
-    setIsSubmitting(true)
-
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // Success
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
-
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null)
-      }, 5000)
-    } catch (error) {
-      setSubmitStatus("error")
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -265,7 +173,9 @@ export default function Home() {
               <span className="relative z-10 group-hover:text-[#5d9bff] transition-colors duration-300">ikoli</span>
             </span>
           </div>
-          <nav className="flex gap-6">
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex gap-6">
             <button
               onClick={() => scrollToSection("home")}
               className={`text-sm font-bold hover:text-[#a8c5ff] transition-colors relative ${activeSection === "home" ? "text-[#a8c5ff]" : "text-gray-400"}`}
@@ -312,7 +222,88 @@ export default function Home() {
               )}
             </button>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-gray-300 hover:text-white transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-gradient-to-b from-[#051428] to-[#0a2547] border-b border-gray-500/20 py-4 px-4 animate-fade-in">
+            <div className="flex flex-col space-y-4">
+              <button
+                onClick={() => {
+                  scrollToSection("home")
+                  setMobileMenuOpen(false)
+                }}
+                className={`text-sm font-bold py-2 px-4 rounded-md ${activeSection === "home" ? "bg-[#4d8bf5]/20 text-[#a8c5ff]" : "text-gray-400"}`}
+              >
+                Home
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("education")
+                  setMobileMenuOpen(false)
+                }}
+                className={`text-sm font-bold py-2 px-4 rounded-md ${activeSection === "education" ? "bg-[#4d8bf5]/20 text-[#a8c5ff]" : "text-gray-400"}`}
+              >
+                Education
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("services")
+                  setMobileMenuOpen(false)
+                }}
+                className={`text-sm font-bold py-2 px-4 rounded-md ${activeSection === "services" ? "bg-[#4d8bf5]/20 text-[#a8c5ff]" : "text-gray-400"}`}
+              >
+                Services
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("projects")
+                  setMobileMenuOpen(false)
+                }}
+                className={`text-sm font-bold py-2 px-4 rounded-md ${activeSection === "projects" ? "bg-[#4d8bf5]/20 text-[#a8c5ff]" : "text-gray-400"}`}
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("contact")
+                  setMobileMenuOpen(false)
+                }}
+                className={`text-sm font-bold py-2 px-4 rounded-md ${activeSection === "contact" ? "bg-[#4d8bf5]/20 text-[#a8c5ff]" : "text-gray-400"}`}
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        )}
       </header>
       <main className="flex-1 pt-16">
         <section id="home" className="container mx-auto px-4 py-20 md:py-32 relative overflow-hidden">
@@ -342,11 +333,11 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col md:flex-row items-center relative z-10">
-            <div className="md:w-1/2 space-y-6">
+            <div className="md:w-1/2 space-y-4 md:space-y-6 text-center md:text-left">
               {/* Animated greeting */}
               <div className="overflow-hidden">
                 <h2
-                  className="text-xl text-[#8ba9e0] transform translate-y-0 opacity-100 transition-all duration-700 ease-out"
+                  className="text-lg md:text-xl text-[#8ba9e0] transform translate-y-0 opacity-100 transition-all duration-700 ease-out"
                   style={{ animation: "slideInUp 0.7s ease-out" }}
                 >
                   Welcome to my portfolio
@@ -356,25 +347,25 @@ export default function Home() {
               <div className="font-bold space-y-2">
                 <div className="overflow-hidden">
                   <h1
-                    className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl text-[#a8c5ff] transform translate-y-0 opacity-100 transition-all duration-700 delay-300 ease-out pb-2"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#a8c5ff] transform translate-y-0 opacity-100 transition-all duration-700 delay-300 ease-out pb-2"
                     style={{ animation: "slideInUp 0.7s ease-out 0.3s both" }}
                   >
                     Hi, it's Nengi
                   </h1>
                 </div>
 
-                <div className="mt-2 flex items-baseline h-16">
-                  <span className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-[#8ba9e0]">I'm a</span>
-                  <div className="relative ml-3 inline-block min-w-[200px]">
-                    <span className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-gray-200">{displayText}</span>
-                    <span className="inline-block w-1 h-8 sm:h-10 bg-gray-300 animate-blink ml-1 align-middle"></span>
+                <div className="mt-2 flex flex-col sm:flex-row items-center justify-center md:justify-start h-16 md:h-auto">
+                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#8ba9e0]">I'm a</span>
+                  <div className="relative ml-0 sm:ml-3 inline-block min-w-[200px]">
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-200">{displayText}</span>
+                    <span className="inline-block w-1 h-6 sm:h-8 bg-gray-300 animate-blink ml-1 align-middle"></span>
                   </div>
                 </div>
               </div>
 
               <div className="overflow-hidden">
                 <p
-                  className="text-sm md:text-base text-gray-300 max-w-md transform translate-y-0 opacity-100 transition-all duration-700 delay-600 ease-out"
+                  className="text-sm md:text-base text-gray-300 max-w-md mx-auto md:mx-0 transform translate-y-0 opacity-100 transition-all duration-700 delay-600 ease-out"
                   style={{ animation: "slideInUp 0.7s ease-out 0.6s both" }}
                 >
                   Based in Washington DC, I create engaging digital experiences with a focus on user-centered design. My
@@ -384,7 +375,7 @@ export default function Home() {
               </div>
 
               <div
-                className="flex gap-6 items-center -mt-1 overflow-hidden transform translate-y-0 opacity-100 transition-all duration-700 delay-900 ease-out"
+                className="flex justify-center md:justify-start gap-6 items-center -mt-1 overflow-hidden transform translate-y-0 opacity-100 transition-all duration-700 delay-900 ease-out"
                 style={{ animation: "slideInUp 0.7s ease-out 0.9s both" }}
               >
                 <Link
@@ -393,7 +384,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="transition-all duration-300 hover:scale-110 group"
                 >
-                  <div className="w-12 h-12 bg-gray-700/50 rounded-full flex items-center justify-center relative overflow-hidden">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-700/50 rounded-full flex items-center justify-center relative overflow-hidden">
                     {/* Animated border */}
                     <div className="absolute inset-0 rounded-full border-2 border-[#4d8bf5]/0 group-hover:border-[#4d8bf5]/50 transition-all duration-500"></div>
 
@@ -403,7 +394,7 @@ export default function Home() {
                     {/* Glow effect */}
                     <div className="absolute inset-0 rounded-full bg-[#4d8bf5]/0 group-hover:bg-[#4d8bf5]/20 blur-md transition-all duration-500"></div>
 
-                    <Github className="w-6 h-6 text-gray-300 relative z-10 group-hover:text-white transition-colors duration-300" />
+                    <Github className="w-5 h-5 md:w-6 md:h-6 text-gray-300 relative z-10 group-hover:text-white transition-colors duration-300" />
                   </div>
                 </Link>
                 <Link
@@ -412,7 +403,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="transition-all duration-300 hover:scale-110 group"
                 >
-                  <div className="w-12 h-12 bg-gray-700/50 rounded-full flex items-center justify-center relative overflow-hidden">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-700/50 rounded-full flex items-center justify-center relative overflow-hidden">
                     {/* Animated border */}
                     <div className="absolute inset-0 rounded-full border-2 border-[#4d8bf5]/0 group-hover:border-[#4d8bf5]/50 transition-all duration-500"></div>
 
@@ -422,11 +413,11 @@ export default function Home() {
                     {/* Glow effect */}
                     <div className="absolute inset-0 rounded-full bg-[#4d8bf5]/0 group-hover:bg-[#4d8bf5]/20 blur-md transition-all duration-500"></div>
 
-                    <Linkedin className="w-6 h-6 text-gray-300 relative z-10 group-hover:text-white transition-colors duration-300" />
+                    <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-gray-300 relative z-10 group-hover:text-white transition-colors duration-300" />
                   </div>
                 </Link>
                 <Link href="mailto:ikolinengi@gmail.com" className="transition-all duration-300 hover:scale-110 group">
-                  <div className="w-12 h-12 bg-gray-700/50 rounded-full flex items-center justify-center relative overflow-hidden">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-700/50 rounded-full flex items-center justify-center relative overflow-hidden">
                     {/* Animated border */}
                     <div className="absolute inset-0 rounded-full border-2 border-[#4d8bf5]/0 group-hover:border-[#4d8bf5]/50 transition-all duration-500"></div>
 
@@ -436,17 +427,17 @@ export default function Home() {
                     {/* Glow effect */}
                     <div className="absolute inset-0 rounded-full bg-[#4d8bf5]/0 group-hover:bg-[#4d8bf5]/20 blur-md transition-all duration-500"></div>
 
-                    <Mail className="w-6 h-6 text-gray-300 relative z-10 group-hover:text-white transition-colors duration-300" />
+                    <Mail className="w-5 h-5 md:w-6 md:h-6 text-gray-300 relative z-10 group-hover:text-white transition-colors duration-300" />
                   </div>
                 </Link>
               </div>
 
               <div
-                className="flex gap-6 pt-2 overflow-hidden transform translate-y-0 opacity-100 transition-all duration-700 delay-1200 ease-out"
+                className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 sm:gap-6 pt-2 overflow-hidden transform translate-y-0 opacity-100 transition-all duration-700 delay-1200 ease-out"
                 style={{ animation: "slideInUp 0.7s ease-out 1.2s both" }}
               >
                 <button
-                  className="relative overflow-hidden bg-[#4d8bf5] text-white px-8 py-3 rounded-md transition-all duration-500 hover:bg-[#3a78e0] group"
+                  className="relative overflow-hidden bg-[#4d8bf5] text-white px-6 sm:px-8 py-3 rounded-md transition-all duration-500 hover:bg-[#3a78e0] group"
                   onClick={() => scrollToSection("contact")}
                 >
                   {/* Button shine effect */}
@@ -458,7 +449,7 @@ export default function Home() {
                   href="https://docs.google.com/document/d/1ZsqmOXsUweQ3zUFR_glKfU9Kz3k5Md4B/edit?usp=sharing&ouid=108781881912085245396&rtpof=true&sd=true"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative overflow-hidden border-2 border-[#4d8bf5] text-gray-200 px-8 py-3 rounded-md transition-all duration-500 hover:border-[#3a78e0] group inline-block text-center"
+                  className="relative overflow-hidden border-2 border-[#4d8bf5] text-gray-200 px-6 sm:px-8 py-3 rounded-md transition-all duration-500 hover:border-[#3a78e0] group inline-block text-center"
                 >
                   {/* Button shine effect */}
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
@@ -469,17 +460,17 @@ export default function Home() {
             </div>
 
             <div
-              className="md:w-1/2 flex justify-center mt-16 md:mt-0 transform translate-y-0 opacity-100 transition-all duration-700 delay-1500 ease-out"
+              className="md:w-1/2 flex justify-center mt-12 md:mt-0 transform translate-y-0 opacity-100 transition-all duration-700 delay-1500 ease-out"
               style={{ animation: "fadeIn 1s ease-out 1.5s both" }}
             >
-              <div className="relative w-80 h-80 mx-auto my-8">
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
                 {/* Animated orbital rings */}
                 <div
-                  className="absolute inset-0 -m-10 rounded-full border-2 border-[#4d8bf5]/20 animate-spin-slow"
+                  className="absolute inset-0 -m-6 sm:-m-8 md:-m-10 rounded-full border-2 border-[#4d8bf5]/20 animate-spin-slow"
                   style={{ animationDuration: "20s" }}
                 ></div>
                 <div
-                  className="absolute inset-0 -m-6 rounded-full border-2 border-[#4d8bf5]/10 animate-spin-slow"
+                  className="absolute inset-0 -m-4 sm:-m-5 md:-m-6 rounded-full border-2 border-[#4d8bf5]/10 animate-spin-slow"
                   style={{ animationDuration: "15s", animationDirection: "reverse" }}
                 ></div>
 
@@ -595,12 +586,12 @@ export default function Home() {
                         </div>
                         <div className="flex items-start mb-4">
                           <Calendar className="w-5 h-5 text-[#a8c5ff] mr-2 mt-1" />
-                          <span className="text-[#a8c5ff] font-medium">2023 - 2025</span>
+                          <span className="text-[#a8c5ff] font-medium">2024 - 2025</span>
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-3">Path2TECH Full Stack Developer Program</h3>
                         <div className="flex items-start mb-4">
                           <Briefcase className="w-5 h-5 text-gray-400 mr-2 mt-1" />
-                          <span className="text-gray-300">Professional Certification</span>
+                          <span className="text-gray-300">NPower | Professional Certification</span>
                         </div>
                         <p className="text-gray-400">
                           Comprehensive training in modern web development technologies including React, JavaScript,
@@ -906,7 +897,7 @@ export default function Home() {
                             <div className="relative w-full">
                               <input
                                 type="text"
-                                className="w-full bg-[#0a2547] border border-[#4d8bf5]/50 rounded-md py-2 px-3 text-sm text-gray-200 focus:outline-none"
+                                className="w-full bg-[#0a2547] border border-[#4d8bf5]/50 rounded-md py-2 px-3 text-sm text-gray-200 focus:outline-none focus:border-[#4d8bf5]/70 transition-colors"
                                 placeholder="Enter city, zip, or landmark..."
                                 readOnly
                               />
@@ -990,75 +981,90 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Capstone Project: Food Ordering Website */}
-              <div className="col-span-1 md:col-span-2 mb-16 perspective">
-                <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#051428] to-[#0a2547] border border-[#4d8bf5]/30 shadow-lg shadow-[#4d8bf5]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/50">
+              {/* UI/UX Portfolio Case Studies */}
+              <div className="mb-16 perspective">
+                <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#0c2c5a] to-[#051428]/90 border border-[#4d8bf5]/30 shadow-lg shadow-[#4d8bf5]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/50">
                   <div className="absolute top-4 left-4 bg-[#4d8bf5] text-white px-3 py-1 rounded-full text-xs font-medium z-20">
-                    Capstone Project
+                    UI/UX Case Studies
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6 p-8">
                     <div className="overflow-hidden rounded-lg group-hover:shadow-lg transition-all duration-500 h-[300px] md:h-auto">
-                      {/* Food Ordering Website Preview */}
-                      <div className="relative w-full h-full bg-gradient-to-b from-[#0c2c5a] to-[#051428] overflow-hidden border border-[#4d8bf5]/20 rounded-lg flex items-center justify-center">
-                        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('/placeholder.svg?height=500&width=500')] bg-repeat"></div>
+                      {/* UI/UX Portfolio Preview */}
+                      <div className="relative w-full h-full bg-gradient-to-b from-[#0c2c5a] to-[#051428] overflow-hidden border border-[#4d8bf5]/20 rounded-lg">
+                        {/* Design elements background */}
+                        <div className="absolute inset-0 opacity-10">
+                          <div className="absolute top-5 left-5 w-20 h-20 border-2 border-[#4d8bf5]/30 rounded-lg transform rotate-12"></div>
+                          <div className="absolute bottom-10 right-10 w-16 h-16 border-2 border-[#4d8bf5]/30 rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-[#4d8bf5]/30 rounded-lg transform -rotate-12"></div>
+                        </div>
 
-                        {/* Mock food ordering interface */}
-                        <div className="w-full max-w-[280px] bg-[#051428]/80 rounded-lg p-5 border border-[#4d8bf5]/30 shadow-lg z-10">
-                          <div className="text-center mb-3">
-                            <p className="text-[#a8c5ff] text-lg font-bold">YourMeal</p>
-                            <p className="text-gray-400 text-xs">Food Delivery Service</p>
+                        {/* Portfolio mockup */}
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[280px] bg-white rounded-lg overflow-hidden shadow-xl">
+                          {/* Header */}
+                          <div className="bg-gray-800 p-2 flex justify-between items-center">
+                            <div className="flex space-x-1">
+                              <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                              <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                            </div>
+                            <div className="text-white text-xs">UI/UX Portfolio</div>
+                            <div className="w-4"></div>
                           </div>
 
-                          <div className="bg-[#0a2547]/80 rounded-lg p-3 mb-3 flex space-x-3">
-                            <div className="h-16 w-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-md flex items-center justify-center">
-                              <div className="w-10 h-6 bg-white rounded-sm transform rotate-45 relative">
-                                <div className="absolute w-6 h-6 bg-white rounded-full -top-3 -left-1"></div>
-                                <div className="absolute w-6 h-6 bg-white rounded-full -top-3 -right-1"></div>
+                          {/* Content */}
+                          <div className="p-3">
+                            {/* Navigation */}
+                            <div className="flex justify-between text-xs text-gray-600 mb-3 border-b pb-2">
+                              <span className="font-medium">Home</span>
+                              <span>Projects</span>
+                              <span>About</span>
+                              <span>Contact</span>
+                            </div>
+
+                            {/* Project preview */}
+                            <div className="mb-3">
+                              <div className="text-sm font-bold text-gray-800 mb-1">Case Studies</div>
+                              <div className="bg-gray-100 rounded-lg p-2 mb-2">
+                                <div className="h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md mb-1"></div>
+                                <div className="text-xs font-medium">Groove Media App</div>
+                                <div className="text-[10px] text-gray-500">Music Streaming UX Design</div>
+                              </div>
+                              <div className="bg-gray-100 rounded-lg p-2">
+                                <div className="h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-md mb-1"></div>
+                                <div className="text-xs font-medium">Savr Recipe App</div>
+                                <div className="text-[10px] text-gray-500">Food App Redesign</div>
                               </div>
                             </div>
-                            <div className="flex flex-col justify-center">
-                              <p className="text-white text-sm font-medium">Cheese Burger</p>
-                              <p className="text-gray-400 text-xs">Classic burger with cheese</p>
-                              <p className="text-[#a8c5ff] text-sm font-bold mt-1">$8.99</p>
-                            </div>
-                          </div>
 
-                          <div className="bg-[#0a2547]/80 rounded-lg p-3 mb-3 flex space-x-3">
-                            <div className="h-16 w-16 bg-gradient-to-br from-green-400 to-teal-500 rounded-md flex items-center justify-center">
-                              <div className="w-8 h-8 bg-white rounded-full">
-                                <div className="w-8 h-2 bg-green-500 rounded absolute transform translate-y-3"></div>
+                            {/* Footer */}
+                            <div className="flex justify-between items-center text-[10px] text-gray-500 pt-1 border-t">
+                              <span>© 2024 Nengi Ikoli</span>
+                              <div className="flex space-x-1">
+                                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+                                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+                                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
                               </div>
                             </div>
-                            <div className="flex flex-col justify-center">
-                              <p className="text-white text-sm font-medium">Veggie Pizza</p>
-                              <p className="text-gray-400 text-xs">Fresh vegetables on thin crust</p>
-                              <p className="text-[#a8c5ff] text-sm font-bold mt-1">$12.99</p>
-                            </div>
                           </div>
-
-                          <button className="w-full bg-[#4d8bf5] text-white py-2 rounded-md text-sm font-medium hover:bg-[#3a78e0] transition-colors">
-                            Checkout
-                          </button>
                         </div>
                       </div>
                     </div>
 
                     <div className="flex flex-col justify-center">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">MERN Stack</span>
-                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">React</span>
-                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">Node.js</span>
-                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">MongoDB</span>
-                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">Express.js</span>
+                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">UI/UX Design</span>
+                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">Figma</span>
+                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">User Research</span>
+                        <span className="px-2 py-1 bg-[#4d8bf5]/20 text-[#a8c5ff] rounded text-xs">Prototyping</span>
                       </div>
 
-                      <h3 className="text-3xl font-bold text-white mb-4">Food Ordering Website</h3>
+                      <h3 className="text-3xl font-bold text-white mb-4">UI/UX Portfolio Case Studies</h3>
 
                       <p className="text-gray-300 mb-6">
-                        A full-stack food ordering platform built with the MERN stack (MongoDB, Express, React,
-                        Node.js). This capstone project features user authentication, restaurant browsing, menu
-                        management, cart functionality, order processing, and payment integration.
+                        A collection of in-depth UI/UX case studies showcasing my design process, problem-solving
+                        approach, and user-centered design methodology. These projects demonstrate my ability to create
+                        intuitive, engaging, and accessible digital experiences.
                       </p>
 
                       <div className="space-y-3 mb-6">
@@ -1067,34 +1073,43 @@ export default function Home() {
                             <span className="text-xs text-white font-bold">1</span>
                           </div>
                           <p className="text-gray-300 flex-1">
-                            Frontend built with React, featuring responsive design and intuitive user experience
+                            <span className="font-medium text-white">Groove Media App:</span> A music streaming
+                            application designed to enhance user engagement through personalized playlists and social
+                            sharing features
                           </p>
                         </div>
                         <div className="flex items-start">
                           <div className="w-5 h-5 rounded-full bg-[#4d8bf5] flex items-center justify-center mt-0.5 mr-3">
                             <span className="text-xs text-white font-bold">2</span>
                           </div>
-                          <p className="text-gray-300 flex-1">Backend API powered by Node.js and Express.js</p>
+                          <p className="text-gray-300 flex-1">
+                            <span className="font-medium text-white">Savr Recipe App:</span> A redesign of a startup
+                            cooking application to address user feedback and improve usability
+                          </p>
                         </div>
                         <div className="flex items-start">
                           <div className="w-5 h-5 rounded-full bg-[#4d8bf5] flex items-center justify-center mt-0.5 mr-3">
                             <span className="text-xs text-white font-bold">3</span>
                           </div>
                           <p className="text-gray-300 flex-1">
-                            MongoDB database for storing user profiles, restaurant data, and orders
+                            <span className="font-medium text-white">Flip & Floss Industry Design Project:</span> A
+                            user-centric reward system interface designed for a financial literacy application targeting
+                            young users with gamified elements
                           </p>
                         </div>
                       </div>
 
                       <div className="flex gap-3 mt-2">
                         <a
-                          href="https://github.com/NengiIkoli"
+                          href="https://ikolinengi.wixsite.com/porfolio"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-6 py-3 rounded-md text-sm transition-all duration-300 hover:bg-[#3a78e0] flex-1"
+                          className="relative overflow-hidden group flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-6 py-3 rounded-md text-sm transition-all duration-300 hover:bg-[#3a78e0]"
                         >
-                          <span>Coming Soon</span>
-                          <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                          <span>View Case Studies</span>
+                          <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          {/* Button shine effect */}
+                          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
                         </a>
                       </div>
                     </div>
@@ -1423,68 +1438,115 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* To-Do List JavaScript Project */}
-                <div className="group perspective transform transition-all duration-500 hover:scale-[1.02]">
-                  <div className="relative bg-gradient-to-br from-[#0a2547] to-[#0f3166] rounded-xl overflow-hidden border border-gray-500/20 h-full shadow-lg transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/30">
-                    {/* Card top accent */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#4d8bf5]/0 via-[#4d8bf5] to-[#4d8bf5]/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+              {/* View More Projects Button */}
+              <div className="mt-12 text-center">
+                <a
+                  href="https://github.com/NengiIkoli"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#051428] border border-[#4d8bf5]/50 text-gray-200 px-8 py-3 rounded-md transition-all duration-300 hover:bg-[#0a2547] hover:text-white group"
+                >
+                  <span>View More Projects</span>
+                  <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                    {/* Content */}
-                    <div className="relative z-10 p-6 flex flex-col h-full">
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="bg-[#4d8bf5]/20 text-[#a8c5ff] px-3 py-1 rounded text-xs font-medium">
-                          JavaScript
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <a
-                            href="https://github.com/NengiIkoli/To-Do-List-Javascript-"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <Github className="w-5 h-5 text-gray-400 hover:text-gray-200 transition-colors" />
-                          </a>
-                        </div>
-                      </div>
+        <section id="contact" className="py-16 md:py-20 bg-black relative overflow-hidden">
+          {/* Background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#0a2547]/30 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-[#0a2547]/20 to-transparent"></div>
+            <div className="absolute inset-0">
+              <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-[#a8c5ff]/30 animate-pulse-slow"></div>
+              <div
+                className="absolute top-3/4 left-1/3 w-2 h-2 rounded-full bg-[#a8c5ff]/30 animate-pulse-slow"
+                style={{ animationDelay: "1s" }}
+              ></div>
+              <div
+                className="absolute top-1/2 right-1/4 w-2 h-2 rounded-full bg-[#a8c5ff]/30 animate-pulse-slow"
+                style={{ animationDelay: "2s" }}
+              ></div>
+              <div
+                className="absolute top-1/4 right-1/3 w-2 h-2 rounded-full bg-[#a8c5ff]/30 animate-pulse-slow"
+                style={{ animationDelay: "1.5s" }}
+              ></div>
+            </div>
+          </div>
 
-                      <h3 className="text-xl font-bold text-white mb-3">To-Do List</h3>
+          <div className="container mx-auto px-4 relative z-10">
+            <div
+              className={`transition-all duration-1000 transform ${visibleSections.contact ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+            >
+              <div className="text-center mb-8 md:mb-12 relative">
+                <h2 className="text-4xl md:text-5xl font-bold text-white inline-block relative">
+                  Get In Touch
+                  <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#a8c5ff] to-transparent"></div>
+                </h2>
+                <p className="text-gray-400 mt-4 md:mt-6 max-w-2xl mx-auto text-sm md:text-base">
+                  Have a project in mind or want to discuss potential opportunities? I'd love to hear from you.
+                </p>
+              </div>
 
-                      {/* Project preview */}
-                      <div className="mt-2 mb-4 rounded-md border border-[#4d8bf5]/20 overflow-hidden group-hover:border-[#4d8bf5]/40 transition-colors">
-                        <div className="bg-[#051428] px-2 py-1 border-b border-[#4d8bf5]/20 flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                          <div className="text-gray-400 text-xs ml-2">app.js</div>
-                        </div>
-                        <div className="bg-white p-3">
-                          <div className="text-center text-gray-800 font-medium mb-2">My To-Do List</div>
-                          <div className="bg-gray-100 p-2 rounded mb-2">
-                            <div className="text-xs text-gray-600 mb-1">Add a task</div>
-                            <div className="h-5 bg-white rounded border border-gray-300 mb-1"></div>
-                            <div className="h-6 bg-blue-500 rounded text-center">
-                              <span className="text-white text-xs">Add Task</span>
-                            </div>
-                          </div>
-                          <div className="text-xs text-gray-600">Tasks</div>
-                          <div className="h-20 bg-gray-50 rounded border border-gray-200"></div>
-                        </div>
-                      </div>
-
-                      <p className="text-gray-400 mb-4 flex-grow">
-                        A JavaScript to-do list application that allows users to add, display, and remove tasks with
-                        persistent local storage.
+              <div className="max-w-2xl mx-auto">
+                <div className="bg-gradient-to-br from-[#051428] to-[#0a2547] rounded-xl border border-gray-500/20 shadow-lg overflow-hidden p-5 md:p-8">
+                  <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                    {/* Left side - Email info */}
+                    <div className="w-full md:w-1/2 text-center md:text-left">
+                      <Mail className="w-12 h-12 text-[#4d8bf5] mx-auto md:mx-0 mb-3" />
+                      <h3 className="text-xl font-bold text-white mb-2">Send Me an Email</h3>
+                      <p className="text-gray-300 text-sm mb-4">
+                        The quickest way to reach me is through my email. I typically respond within 24-48 hours.
                       </p>
+                      <a
+                        href="mailto:ikolinengi@gmail.com"
+                        className="inline-flex items-center justify-center gap-2 bg-[#4d8bf5] text-white px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-[#3a78e0] hover:scale-105 text-sm md:text-base w-full md:w-auto"
+                      >
+                        <Mail className="w-4 h-4" />
+                        <span>ikolinengi@gmail.com</span>
+                      </a>
+                    </div>
 
-                      <div className="mt-auto flex justify-center">
+                    {/* Divider for mobile */}
+                    <div className="w-full h-px bg-gray-700/50 my-6 md:hidden"></div>
+
+                    {/* Vertical divider for desktop */}
+                    <div className="hidden md:block w-px h-40 bg-gray-700/50"></div>
+
+                    {/* Right side - Social links */}
+                    <div className="w-full md:w-1/2 text-center md:text-left">
+                      <h3 className="text-xl font-bold text-white mb-3">Connect With Me</h3>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Follow me on social media to see my latest projects and updates.
+                      </p>
+                      <div className="flex justify-center md:justify-start gap-4">
                         <a
-                          href="https://github.com/NengiIkoli/To-Do-List-Javascript-"
+                          href="https://www.linkedin.com/in/ayebanengiyefaikoli/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 bg-[#4d8bf5]/20 text-[#a8c5ff] hover:bg-[#4d8bf5]/30 px-6 py-2 rounded-md text-sm transition-all duration-300 w-full"
+                          className="bg-[#0a2547] p-3 rounded-full flex items-center justify-center border border-gray-500/30 hover:border-[#4d8bf5]/50 transition-all duration-300 group hover:scale-110"
                         >
-                          <span>View Source Code</span>
-                          <Github className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                          <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-[#4d8bf5] transition-colors" />
+                        </a>
+                        <a
+                          href="https://github.com/NengiIkoli"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#0a2547] p-3 rounded-full flex items-center justify-center border border-gray-500/30 hover:border-[#4d8bf5]/50 transition-all duration-300 group hover:scale-110"
+                        >
+                          <Github className="w-5 h-5 text-gray-400 group-hover:text-[#4d8bf5] transition-colors" />
+                        </a>
+                        <a
+                          href="https://ikolinengi.wixsite.com/porfolio"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#0a2547] p-3 rounded-full flex items-center justify-center border border-gray-500/30 hover:border-[#4d8bf5]/50 transition-all duration-300 group hover:scale-110"
+                        >
+                          <Palette className="w-5 h-5 text-gray-400 group-hover:text-[#4d8bf5] transition-colors" />
                         </a>
                       </div>
                     </div>
@@ -1494,152 +1556,26 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <section id="contact" className="py-20 bg-black relative overflow-hidden">
-          {/* Background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=500&width=500')] bg-repeat opacity-5"></div>
-            <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-[#4d8bf5]/5 blur-3xl"></div>
-            <div className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-[#4d8bf5]/5 blur-3xl"></div>
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <div
-              className={`transition-all duration-1000 transform ${visibleSections.contact ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-            >
-              <div className="text-center mb-16 relative">
-                <h2 className="text-5xl font-bold text-white inline-block relative">
-                  Contact Me
-                  <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#a8c5ff] to-transparent"></div>
-                </h2>
-                <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-                  Feel free to reach out for collaborations or just a friendly hello!
-                </p>
-              </div>
-
-              <div className="max-w-3xl mx-auto">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-                      Name
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="shadow-sm bg-[#0a2547] border border-gray-700 text-gray-200 text-sm rounded-md focus:ring-[#4d8bf5] focus:border-[#4d8bf5] block w-full p-2.5"
-                        placeholder="Your Name"
-                      />
-                      {errors.name && <p className="mt-2 text-sm text-red-500">{errors.name}</p>}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                      Email
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="shadow-sm bg-[#0a2547] border border-gray-700 text-gray-200 text-sm rounded-md focus:ring-[#4d8bf5] focus:border-[#4d8bf5] block w-full p-2.5"
-                        placeholder="you@example.com"
-                      />
-                      {errors.email && <p className="mt-2 text-sm text-red-500">{errors.email}</p>}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-300">
-                      Subject
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className="shadow-sm bg-[#0a2547] border border-gray-700 text-gray-200 text-sm rounded-md focus:ring-[#4d8bf5] focus:border-[#4d8bf5] block w-full p-2.5"
-                        placeholder="Subject"
-                      />
-                      {errors.subject && <p className="mt-2 text-sm text-red-500">{errors.subject}</p>}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300">
-                      Message
-                    </label>
-                    <div className="mt-1">
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleChange}
-                        className="shadow-sm bg-[#0a2547] border border-gray-700 text-gray-200 text-sm rounded-md focus:ring-[#4d8bf5] focus:border-[#4d8bf5] block w-full p-2.5"
-                        placeholder="Your Message"
-                      ></textarea>
-                      {errors.message && <p className="mt-2 text-sm text-red-500">{errors.message}</p>}
-                    </div>
-                  </div>
-
-                  <div>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="relative overflow-hidden bg-[#4d8bf5] text-white px-8 py-3 rounded-md transition-all duration-500 hover:bg-[#3a78e0] group disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {/* Button shine effect */}
-                      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
-
-                      <span className="relative z-10 font-medium">
-                        {isSubmitting ? "Submitting..." : "Send Message"}
-                      </span>
-                    </button>
-                  </div>
-
-                  {submitStatus === "success" && (
-                    <div
-                      className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Success!</strong>
-                      <span className="block sm:inline">Your message has been sent.</span>
-                    </div>
-                  )}
-
-                  {submitStatus === "error" && (
-                    <div
-                      className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                      role="alert"
-                    >
-                      <strong className="font-bold">Error!</strong>
-                      <span className="block sm:inline">
-                        There was an error submitting your message. Please try again.
-                      </span>
-                    </div>
-                  )}
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="bg-[#051428] border-t border-gray-500/20 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Nengi Ikoli. All rights reserved.</p>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <div className="flex items-center gap-1 text-xl cursor-pointer">
+                <span className="text-gray-300 font-bold">nengi</span>
+                <span className="text-[#4d8bf5] font-bold">ikoli</span>
+              </div>
+              <p className="text-gray-400 text-sm mt-1">UI/UX Designer & Front-End Developer</p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end">
+              <p className="text-gray-400 text-sm">© {new Date().getFullYear()} Nengi Ikoli. All rights reserved.</p>
+              <p className="text-gray-500 text-xs mt-1">Designed and built with passion</p>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
   )
 }
-
