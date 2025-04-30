@@ -541,7 +541,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute left-10 -top-8 sm:-right-16 sm:top-0 text-white font-bold text-xl whitespace-nowrap">
+                      <div className="absolute left-1/2 -translate-x-1/2 -top-8 sm:-right-16 sm:top-0 sm:translate-x-0 text-white font-bold text-xl whitespace-nowrap">
                         2022
                       </div>
                     </div>
@@ -578,7 +578,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute left-10 -top-8 sm:-left-16 sm:top-0 text-white font-bold text-xl whitespace-nowrap">
+                      <div className="absolute left-1/2 -translate-x-1/2 -top-8 sm:-left-16 sm:top-0 sm:translate-x-0 text-white font-bold text-xl whitespace-nowrap">
                         2025
                       </div>
                     </div>
@@ -615,7 +615,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute left-10 -top-8 sm:-right-16 sm:top-0 text-white font-bold text-xl whitespace-nowrap">
+                      <div className="absolute left-1/2 -translate-x-1/2 -top-8 sm:-right-16 sm:top-0 sm:translate-x-0 text-white font-bold text-xl whitespace-nowrap">
                         2026
                       </div>
                     </div>
