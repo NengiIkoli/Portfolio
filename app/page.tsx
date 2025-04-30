@@ -20,6 +20,7 @@ import {
 } from "lucide-react"
 
 export default function Home() {
+  console.log("Page component rendering")
   const [activeSection, setActiveSection] = useState("home")
   const [weatherIcon, setWeatherIcon] = useState<"sun" | "cloud" | "rain">("sun")
   const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({
@@ -354,7 +355,7 @@ export default function Home() {
                   </h1>
                 </div>
 
-                <div className="mt-2 flex flex-col sm:flex-row items-center justify-center md:justify-start h-16 md:h-auto">
+                <div className="mt-2 flex flex-col sm:flex-row items-center justify-center md:justify-start h-20 sm:h-16 md:h-auto">
                   <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#8ba9e0]">I'm a</span>
                   <div className="relative ml-0 sm:ml-3 inline-block min-w-[200px]">
                     <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-200">{displayText}</span>
@@ -533,7 +534,7 @@ export default function Home() {
                 <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#4d8bf5] via-[#a8c5ff] to-[#4d8bf5] animate-pulse-slow z-10"></div>
 
                 {/* Timeline items - Mobile optimized */}
-                <div className="space-y-16 sm:space-y-24 relative">
+                <div className="space-y-20 sm:space-y-24 relative">
                   {/* 2022 - Bachelors */}
                   <div className="flex flex-col sm:flex-row sm:items-center relative group pl-12 sm:pl-0">
                     {/* Timeline dot and year marker - Mobile optimized */}
@@ -541,7 +542,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute left-1/2 -translate-x-1/2 -top-8 sm:-right-16 sm:top-0 sm:translate-x-0 text-white font-bold text-xl whitespace-nowrap">
+                      <div className="absolute left-10 sm:-right-16 top-0 sm:top-0 text-white font-bold text-xl whitespace-nowrap">
                         2022
                       </div>
                     </div>
@@ -578,7 +579,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute left-1/2 -translate-x-1/2 -top-8 sm:-left-16 sm:top-0 sm:translate-x-0 text-white font-bold text-xl whitespace-nowrap">
+                      <div className="absolute left-10 sm:-left-16 top-0 sm:top-0 text-white font-bold text-xl whitespace-nowrap">
                         2025
                       </div>
                     </div>
@@ -615,7 +616,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-[#a8c5ff] z-20 shadow-[0_0_15px_rgba(168,197,255,0.7)] flex items-center justify-center border-4 border-[#051428] group-hover:scale-110 transition-transform duration-300">
                         <div className="w-2 h-2 bg-white rounded-full animate-pulse-slow"></div>
                       </div>
-                      <div className="absolute left-1/2 -translate-x-1/2 -top-8 sm:-right-16 sm:top-0 sm:translate-x-0 text-white font-bold text-xl whitespace-nowrap">
+                      <div className="absolute left-10 sm:-right-16 top-0 sm:top-0 text-white font-bold text-xl whitespace-nowrap">
                         2026
                       </div>
                     </div>
@@ -990,6 +991,15 @@ export default function Home() {
                         </a>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* UI/UX Portfolio Case Studies - Mobile optimized */}
+              <div className="mb-12 perspective">
+                <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-[#0c2c5a] to-[#051428]/90 border border-[#4d8bf5]/30 shadow-lg shadow-[#4d8bf5]/5 transition-all duration-500 hover:shadow-xl hover:shadow-[#4d8bf5]/10 hover:border-[#4d8bf5]/50">
+                  <div className="absolute top-4 left-4 bg-[#4d8bf5] text-white px-3 py-1 rounded-full text-xs font-medium z-20">
+                    UI/UX Case Studies
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6 p-6 sm:p-8">
@@ -1599,9 +1609,9 @@ export default function Home() {
 
       <footer className="bg-[#051428] border-t border-gray-500/20 py-8">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <div className="flex items-center gap-1 text-xl cursor-pointer">
+          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div className="mb-6 md:mb-0">
+              <div className="flex items-center justify-center md:justify-start gap-1 text-xl cursor-pointer">
                 <span className="text-gray-300 font-bold">nengi</span>
                 <span className="text-[#4d8bf5] font-bold">ikoli</span>
               </div>
